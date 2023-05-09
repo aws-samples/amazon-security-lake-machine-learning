@@ -38,12 +38,6 @@ export class SageMakerDomainStack extends Stack {
       type: "String"
     });
 
-    // const security_lake_rollup_region = new CfnParameter(this, "security_lake_rollup_region", {
-    //   description: "Rollup AWS Region where Security Lake consolidates data from all Regions. IMPORTANT: Make sure the Region uses underscores vs. dashes.",
-    //   default: "us_east_1",
-    //   type: "String"
-    // });
-
     // CodeCommit repository
     const sagemaker_notebook_ml_insights_repository = new codecommit.Repository(this, 'sagemaker_notebook_ml_insights_repository', {
       repositoryName: 'sagemaker_ml_insights_repo',
@@ -835,69 +829,6 @@ export class SageMakerDomainStack extends Stack {
         },
       ]
     );
-
-    // Security Lake - Lake Formation Resource Permissions
-
-    // const security_lake_shared_database = new CfnDatabase(this, 'security_lake_shared_database', {
-    //   catalogId: this.account,
-    //   databaseInput:{
-    //     name: 'amazon_security_lake_db_' + security_lake_rollup_region.valueAsString,
-    //     targetDatabase:{
-    //       catalogId: security_lake_aws_account.valueAsString,
-    //       databaseName: 'amazon_security_lake_glue_db_' + security_lake_rollup_region.valueAsString
-    //     }
-    //   }
-    // })
-
-    // const sl_sources = ['cloud_trail', 'route53', 'security_hub_findings', 'vpc_flow']
-
-    // const cdkCfnExecRoleAdminPermission = new CfnDataLakeSettings(this, "cdkCfnExecRoleAdminPermission",{
-    //   admins: [
-    //     {
-    //       dataLakePrincipalIdentifier: Fn.sub((this.synthesizer as DefaultStackSynthesizer).cloudFormationExecutionRoleArn)
-    //     },
-    //   ],
-    // })
-    // cdkCfnExecRoleAdminPermission.addDependency(security_lake_shared_database)
-
-    // const SageMakerDescribePermissions = new CfnPermissions(this, `SageMakerDescribePermissions`, {
-    //   dataLakePrincipal: {
-    //     dataLakePrincipalIdentifier: sagemaker_user_profile_role.roleArn
-    //   },
-    //   permissions: [
-    //       "DESCRIBE"
-    //     ],
-    //   permissionsWithGrantOption:[],        
-    //   resource:{
-    //     databaseResource: {
-    //       name: 'amazon_security_lake_db_' + security_lake_rollup_region.valueAsString,
-    //       catalogId: this.account,
-    //   }
-    // }
-    // });
-    // SageMakerDescribePermissions.addDependency(security_lake_shared_database)
-    
-
-    // for (const [key, value] of Object.entries(sl_sources)) {
-    // const SageMakerSelectPermissions = new CfnPermissions(this, `SageMakerSelectPermissions-${value}`, {
-    //   dataLakePrincipal: {
-    //     dataLakePrincipalIdentifier: sagemaker_user_profile_role.roleArn
-    //   },
-    //   permissions: [
-    //     "SELECT"
-    //   ],
-    //   permissionsWithGrantOption:[],
-    //   resource:{
-    //   tableResource: {
-    //     catalogId: security_lake_aws_account.valueAsString,
-    //     databaseName: 'amazon_security_lake_glue_db_' + security_lake_rollup_region.valueAsString,
-    //     name: 'amazon_security_lake_table_' + security_lake_rollup_region.valueAsString + '_' + value,
-    //     // tableWildcard: { },
-    //   },
-    // }
-    // });
-    // SageMakerSelectPermissions.addDependency(security_lake_shared_database)
-    // }
 
   }
 }
