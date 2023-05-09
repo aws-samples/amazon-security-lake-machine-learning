@@ -1,21 +1,20 @@
 # **Sagemaker-ML-Insights**
 
-The project deploys a [SageMaker Studio](https://aws.amazon.com/sagemaker/studio/) domain and foundational infrastructure to query and load [Amazon Security Lake](https://aws.amazon.com/security-lake/). Once deployed, you can use SageMaker notebooks to run machine learning analytics against your security data to identify trends, anomalies and patterns.
+The project deploys a [Amazon SageMaker Studio](https://aws.amazon.com/sagemaker/studio/) domain and foundational infrastructure to query and load [Amazon Security Lake](https://aws.amazon.com/security-lake/). Once deployed, you can use SageMaker notebooks to run machine learning analytics against your security data to identify trends, anomalies and patterns.
 
 By running machine learning analytics specific to your AWS environment, you will be able to quickly deploy and utilize SageMaker's capabilities to explore and derive ML powered insights from Security Lake data. This will enable you to idenfity different areas of interest to focus on and increase your overall security posture. The solution has a base set of notebooks that are meant to serve as a starting point and looks at [AWS Security Hub](https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html) findings but can be expanded to incorporate other Security Lake native or custom data sources.
 <br>
 
 ## **Prerequisites**
 
-1. [Enable Security Lake](https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html)
-2. [Enable Security Lake for AWS Organizations](https://docs.aws.amazon.com/security-lake/latest/userguide/multi-account-management.html): You can use Amazon Security Lake to collect security logs and events from multiple AWS accounts. To help automate and streamline the management of multiple accounts, we strongly recommend that you integrate Security Lake with AWS Organizations.
-3. [Integration with AWS Security Hub](https://docs.aws.amazon.com/security-lake/latest/userguide/securityhub-integration.html): Security Hub collects security data from across AWS accounts, services, and supported third-party partner products and helps you to analyze your security trends and identify the highest priority security issues. 
-4. [Subcriber Query Access](https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-query-access.html): Subscribers with query access can query data that Security Lake collects. These subscribers directly query AWS Lake Formation tables in your S3 bucket with services like Amazon Athena.
-5. Resource Linking: Create a Lake Formation database in ML insights Subcriber account using resource linking
-- Go to Lake Formation in the ML Insights Subscriber AWS account
-- Create a new database using resource linking
-- Enter Resource Link name
-- Enter Shared database name and shared database Owner ID and click create
+1. [Enable Amazon Security Lake](https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html). For multiple AWS accounts, it is recommended to manage [Security Lake for AWS Organizations](https://docs.aws.amazon.com/security-lake/latest/userguide/multi-account-management.html) To help automate and streamline the management of multiple accounts, we strongly recommend that you integrate Security Lake with AWS Organizations.
+2. As part of this solution, we are focusing on AWS Security Hub so you will need to enable [AWS Security Hub](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html) and configure [AWS Security Hub](https://docs.aws.amazon.com/security-lake/latest/userguide/securityhub-integration.html) as a data source to Security Lake.
+3. [Subcriber Query Access](https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-query-access.html): Subscribers with query access can query data that Security Lake collects. These subscribers directly query AWS Lake Formation tables in your S3 bucket with services like Amazon Athena.
+4. Resource Linking: Create a Lake Formation database in Machine Learning (ML) insights Subcriber account using resource linking
+    - Go to Lake Formation in the ML Insights Subscriber AWS account
+    - Create a new database using resource linking
+    - Enter Resource Link name
+    - Enter Shared database name and shared database Owner ID and click create
 <br><br>
 
 ## **Solution Architecture**
@@ -55,7 +54,7 @@ To build this app, you need to be in the cdk project root folder [`source`](/sou
     $ cdk deploy SageMakerDomainStack
     <deploys the cdk project into the authenticated AWS account>
 
-As part of the CDK deployment, there is an Output value for the CodeCommit repo URL (SageMakerDomainStack.sagemakernotebookmlinsightsrepositoryURL). You will need this value later on to get the python notebooks into your SageMaker app.
+As part of the CDK deployment, there is an Output value for the CodeCommit repo URL (sagemakernotebookmlinsightsrepositoryURL). You will need this value later on to get the python notebooks into your SageMaker app.
 
 ## **Post Deployment Steps**
 
@@ -85,7 +84,7 @@ Now that you have deployed the SageMaker solution, you will need to grant SageMa
 <br>
 
 **CodeCommit**
-- Note: The Output (SageMakerDomainStack.sagemakernotebookmlinsightsrepositoryURL) from the CDK deployment will have the CodeCommit repo URL.
+- Note: The Output (sagemakernotebookmlinsightsrepositoryURL) from the CDK deployment will have the CodeCommit repo URL.
 
 ##### Option 1: 
 1. Open your SageMaker Studio app 
@@ -97,7 +96,7 @@ Now that you have deployed the SageMaker solution, you will need to grant SageMa
 1. Open your SageMaker Studio app 
 2. In the top navigation bar, choose File >> New >> Terminal
 3. Type in the following command: 
-    $ git clone <'Output value for SageMakerDomainStack.sagemakernotebookmlinsightsrepositoryURL'>
+    `$ git clone <'Output value for SageMakerDomainStack.sagemakernotebookmlinsightsrepositoryURL'>`
     <clones notebook repository>
 
 <br><br>
