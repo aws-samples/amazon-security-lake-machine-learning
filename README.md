@@ -96,10 +96,11 @@ Now that you have deployed the SageMaker solution, you will need to grant SageMa
 1. Open your SageMaker Studio app 
 2. In the top navigation bar, choose File >> New >> Terminal
 3. Type in the following command: 
+
     `$ git clone <'Output value for SageMakerDomainStack.sagemakernotebookmlinsightsrepositoryURL'>`
     <clones notebook repository>
 
-<br><br>
+<br>
 
 ## **Generating ML Insights using Sagemaker Studio**
 Now that you have completed the post deployment steps. You are ready to start generating ML insights. The python notebooks which are deployed as part of the solution provide a starting point for how you can conduct AI/ML analysis using data within Security Lake. These can be expanded to any native or custom data sources configured on Security Lake.
