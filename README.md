@@ -113,6 +113,8 @@ Now that you have completed the post deployment steps. You are ready to start ge
 **Load Data:**
 ![0.1-load-data](source/notebooks/tsat/0.1-load-data.ipynb)
 - Establish the Athena connection to query data in Security Lake and create a time series dataset.
+- Note : This notebook queries Security Hub Findings data from Security Lake and can be extended to any other Security Lake data source. To do so, change the TABLE parameter from security hub findings to any desired data source within Security Lake.
+    
 **Trend Detector:**
 ![1.1-trend-detector](source/notebooks/tsat/1.1-trend-detector.ipynb)
 - Trend represents a directional change in the level of a time series. This directional change can be either upward (increase in level) or downward (decrease in level)
