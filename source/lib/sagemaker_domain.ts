@@ -27,7 +27,7 @@ export class SageMakerDomainStack extends Stack {
     }); 
 
     const IAM_role_assumption_for_sagemaker_presigned_url = new CfnParameter(this, "IAM_role_assumption_for_sagemaker_presigned_url", {
-      description: "IAM role to update the trust relationship to allow access for AWS ProServe to create and access SageMaker Studio's presigned URL.",
+      description: "IAM role to update the trust relationship to allow access to create and access SageMaker Studio's presigned URL.",
       default: "arn:aws:iam::1234:role/Admin",
       type: "String"
     });
